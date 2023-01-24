@@ -2,10 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_crud/add.dart';
 import 'package:firebase_crud/editpage.dart';
 import 'package:firebase_crud/my_firebase.dart';
+import 'package:firebase_crud/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:iconly/iconly.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,9 +31,50 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Kontak"),
+        title: const Text("My Kontak"),
+        actions: [
+          // IconButton(
+          //     onPressed: () {
+          //       themeProvider.toggleTheme();
+          //     },
+          //     icon: Icon(Icons.settings))
+          Padding(
+              padding: EdgeInsets.only(right: 10.0),
+              child: PopupMenuButton(
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    onTap: themeProvider.toggleTheme,
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.brightness_6_outlined,
+                          color: Colors.black,
+                        ),
+                        const SizedBox(width: 10),
+                        const Text("Theme"),
+                      ],
+                    ),
+                  ),
+                  PopupMenuItem(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.logout,
+                          color: Colors.black,
+                        ),
+                        const SizedBox(width: 10),
+                        const Text("Logout"),
+                      ],
+                    ),
+                  ),
+                ],
+              ))
+        ],
       ),
       body: StreamBuilder<QuerySnapshot>(
           stream: kontak,
@@ -56,8 +99,7 @@ class _HomePageState extends State<HomePage> {
                   final String nama = contact['nama'];
                   final String nomor = contact['nomor'];
                   final String email = contact['email'];
-                  final String avatar =
-                      "https://avatars.dicebear.com/api/avataaars/$nama.png";
+                  final String avatar = "https://api.multiavatar.com/$nama.png";
                   return ListTile(
                     onTap: () {},
                     leading: Hero(
@@ -75,6 +117,7 @@ class _HomePageState extends State<HomePage> {
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        //
                         IconButton(
                           onPressed: () {
                             Navigator.push(
@@ -124,7 +167,7 @@ class _HomePageState extends State<HomePage> {
           );
         },
         label: const Text("Tambah Kontak"),
-        icon: const Icon(IconlyBroken.document),
+        icon: const Icon(IconlyBroken.plus),
       ),
     );
   }
