@@ -91,7 +91,7 @@ class _EditPageState extends State<EditPage> {
               child: CircleAvatar(
                 radius: 60,
                 backgroundImage: NetworkImage(
-                  "https://avatars.dicebear.com/api/avataaars/${widget.nama}.png",
+                  "https://api.multiavatar.com/${widget.nama}.png",
                 ),
               ),
             ),
