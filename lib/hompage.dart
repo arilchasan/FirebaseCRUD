@@ -1,13 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_crud/add.dart';
 import 'package:firebase_crud/editpage.dart';
 import 'package:firebase_crud/my_firebase.dart';
+import 'package:firebase_crud/push/push.dart';
+import 'package:firebase_crud/settings.dart';
 import 'package:firebase_crud/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,6 +23,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final kontak = MyFirebase.contactsCollection.snapshots();
+
+  int _counter = 0;
+
+  void _incrementCounter() async {
+    String? fcmKey = await getFcmToken();
+    print('fcmKey: $fcmKey');
+  }
 
   void deleteContact(String id) async {
     await MyFirebase.contactsCollection.doc(id).delete();
@@ -60,15 +72,22 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   PopupMenuItem(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SettingsPage(),
+                        ),
+                      );
+                    },
                     child: Row(
                       children: [
                         const Icon(
-                          Icons.logout,
+                          Icons.settings,
                           color: Colors.black,
                         ),
                         const SizedBox(width: 10),
-                        const Text("Logout"),
+                        const Text("Settings"),
                       ],
                     ),
                   ),
@@ -157,7 +176,8 @@ class _HomePageState extends State<HomePage> {
               child: CircularProgressIndicator.adaptive(),
             );
           }),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(IconlyBroken.add_user),
         onPressed: () {
           Navigator.push(
             context,
@@ -166,8 +186,6 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         },
-        label: const Text("Tambah Kontak"),
-        icon: const Icon(IconlyBroken.plus),
       ),
     );
   }
