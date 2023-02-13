@@ -1,0 +1,8 @@
+{
+    "workbench.settings.editor": "json",
+    "workbench.settings.useSplitJSON": true,
+    "maven.terminal.useJavaHome": true,
+    "java.home": "C:\\Program Files\\Eclipse Adoptium\\jdk-17.0.6.10-hotspot\\",
+    "java.configuration.updateBuildConfiguration": "interactive",
+   
+}
