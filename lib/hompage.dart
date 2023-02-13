@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My Kontak"),
+        title: const Text("Kontak"),
         actions: [
           // IconButton(
           //     onPressed: () {
@@ -62,12 +62,12 @@ class _HomePageState extends State<HomePage> {
                     onTap: themeProvider.toggleTheme,
                     child: Row(
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.brightness_6_outlined,
                           color: Colors.black,
                         ),
-                        const SizedBox(width: 10),
-                        const Text("Theme"),
+                        SizedBox(width: 10),
+                        Text("Theme"),
                       ],
                     ),
                   ),
@@ -186,6 +186,7 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         },
+
       ),
     );
   }

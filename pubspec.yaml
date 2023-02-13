@@ -41,6 +41,7 @@ dependencies:
   cloud_firestore: ^4.3.1
   iconly: ^1.0.1
   provider: ^6.0.5
+
   firebase_messaging: ^14.2.1
   flutter_local_notifications: ^13.0.0
   google_sign_in: ^5.4.4
@@ -48,7 +49,7 @@ dependencies:
   persistent_bottom_nav_bar: ^5.0.2
   font_awesome_flutter: ^10.3.0
   get: ^4.6.5
-  
+
 
 dev_dependencies:
   flutter_test:
