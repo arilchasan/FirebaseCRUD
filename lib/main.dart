@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crud/firebase_option.dart';
 import 'package:firebase_crud/hompage.dart';
-import 'package:firebase_crud/login/google.dart';
 import 'package:firebase_crud/login/login.dart';
+import 'package:firebase_crud/login/screen.dart';
 import 'package:firebase_crud/push/push.dart';
 import 'package:firebase_crud/settings.dart';
 import 'package:firebase_crud/theme.dart';
@@ -27,16 +27,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //
     return ChangeNotifierProvider(
-        create: (context) => GoogleSignInProvider(),
+        create: (context) => ThemeProvider(),
         builder: (context, child) {
-          // final themeProvider = Provider.of<GoogleSignInProvider>(context);
-          final loginprovider =
-              Provider.of<GoogleSignInProvider>(context, listen: false);
+          final themeProvider = Provider.of<ThemeProvider>(context);
+
           return MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
-              // theme: themeProvider.theme,
-              home: LoginPage());
+              theme: themeProvider.theme,
+              home: LoginScreen());
         });
   }
 }

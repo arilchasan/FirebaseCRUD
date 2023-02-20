@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crud/add.dart';
 import 'package:firebase_crud/editpage.dart';
+import 'package:firebase_crud/login/login.dart';
 import 'package:firebase_crud/my_firebase.dart';
 import 'package:firebase_crud/push/push.dart';
 import 'package:firebase_crud/settings.dart';
@@ -13,7 +15,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -24,16 +25,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final kontak = MyFirebase.contactsCollection.snapshots();
 
-  int _counter = 0;
+  // int _counter = 0;
 
-  void _incrementCounter() async {
-    String? fcmKey = await getFcmToken();
-    print('fcmKey: $fcmKey');
-  }
+  // void _incrementCounter() async {
+  //   String? fcmKey = await getFcmToken();
+  //   print('fcmKey: $fcmKey');
+  // }
 
   void deleteContact(String id) async {
     await MyFirebase.contactsCollection.doc(id).delete();
-    ScaffoldMessenger.of(context).showSnackBar(
+    ScaffoldMessenger.of(context as BuildContext).showSnackBar(
       SnackBar(
         content: const Text('Kontak berhasil dihapus'),
         backgroundColor: Colors.red[300],
@@ -49,50 +50,77 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text("Kontak"),
         actions: [
-          // IconButton(
-          //     onPressed: () {
-          //       themeProvider.toggleTheme();
-          //     },
-          //     icon: Icon(Icons.settings))
-          Padding(
-              padding: EdgeInsets.only(right: 10.0),
-              child: PopupMenuButton(
-                itemBuilder: (context) => [
-                  PopupMenuItem(
-                    onTap: themeProvider.toggleTheme,
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.brightness_6_outlined,
-                          color: Colors.black,
-                        ),
-                        SizedBox(width: 10),
-                        Text("Theme"),
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SettingsPage(),
-                        ),
-                      );
-                    },
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.settings,
-                          color: Colors.black,
-                        ),
-                        const SizedBox(width: 10),
-                        const Text("Settings"),
-                      ],
-                    ),
-                  ),
-                ],
-              ))
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingsPage()),
+                );
+              },
+              icon: Icon(Icons.settings))
+          // Padding(
+          //   padding: EdgeInsets.only(right: 10.0),
+          //   child: PopupMenuButton(
+          //     itemBuilder: (context) => [
+          //       PopupMenuItem(
+          //         onTap: themeProvider.toggleTheme,
+          //         child: Row(
+          //           children: [
+          //             Icon(
+          //               Icons.brightness_6_outlined,
+          //               color: Colors.black,
+          //             ),
+          //             SizedBox(width: 10),
+          //             Text("Theme"),
+          //           ],
+          //         ),
+          //       ),
+          //       PopupMenuItem(
+          //         onTap: () {
+          //           Navigator.push(
+          //             context,
+          //             MaterialPageRoute(builder: (context) => SettingsPage()),
+          //           );
+          //         },
+          //         child: Row(
+          //           children: [
+          //             const Icon(
+          //               Icons.settings,
+          //               color: Colors.black,
+          //             ),
+          //             const SizedBox(width: 10),
+          //             const Text("Settings"),
+          //           ],
+          //         ),
+          //       ),
+          //       PopupMenuItem(
+          //         onTap: () async {
+          //           if (FirebaseAuth.instance.currentUser != null) {
+          //             // Sign out of Google and Firebase authentication.
+          //             await GoogleSignIn().signOut();
+          //             await FirebaseAuth.instance.signOut();
+
+          //             // Navigate back to the login page.
+          //             Navigator.pushReplacement(
+          //               context,
+          //               MaterialPageRoute(builder: (context) => LoginPage()),
+          //             );
+          //           }
+          //         },
+          //         child: Row(
+          //           children: [
+          //             const Icon(
+          //               Icons.logout_outlined,
+          //               color: Colors.black,
+          //             ),
+          //             const SizedBox(width: 10),
+          //             const Text("Logout"),
+          //           ],
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // )
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -186,7 +214,6 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         },
-
       ),
     );
   }
