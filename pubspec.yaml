@@ -49,6 +49,7 @@ dependencies:
   persistent_bottom_nav_bar: ^5.0.2
   font_awesome_flutter: ^10.3.0
   get: ^4.6.5
+  flutter_switch: ^0.3.2
 
 
 dev_dependencies:
