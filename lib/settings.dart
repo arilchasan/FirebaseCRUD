@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crud/login/login.dart';
 import 'package:firebase_crud/login/screen.dart';
+import 'package:firebase_crud/profile.dart';
 import 'package:firebase_crud/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,51 +27,56 @@ class _SettingsPageState extends State<SettingsPage> {
       appBar: AppBar(
         title: Text("Settings"),
       ),
-      body: ListView(
+      body: Column(
         children: [
-          ListTile(
-            title: Text(
-              'Ganti Tema ',
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                FlutterSwitch(
-                  width: 50,
-                  height: 30,
-                  activeColor: Colors.green,
-                  inactiveColor: Color.fromARGB(255, 94, 89, 89),
-                  value: status2,
-                  onToggle: (val) {
-                    themeProvider.toggleTheme();
-                    setState(() {
-                      status2 = val;
-                    });
-                  },
+          ListView(
+            children: [
+              
+              ListTile(
+                title: Text(
+                  'Ganti Tema ',
                 ),
-              ],
-            ),
-          ),
-          Divider(
-            thickness: 1,
-            height: 1,
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              if (FirebaseAuth.instance.currentUser != null) {
-                // Sign out of Google and Firebase authentication.
-                await GoogleSignIn().signOut();
-                await FirebaseAuth.instance.signOut();
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    FlutterSwitch(
+                      width: 50,
+                      height: 30,
+                      activeColor: Colors.green,
+                      inactiveColor: Color.fromARGB(255, 94, 89, 89),
+                      value: status2,
+                      onToggle: (val) {
+                        themeProvider.toggleTheme();
+                        setState(() {
+                          status2 = val;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Divider(
+                thickness: 1,
+                height: 1,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  if (FirebaseAuth.instance.currentUser != null) {
+                    // Sign out of Google and Firebase authentication.
+                    await GoogleSignIn().signOut();
+                    await FirebaseAuth.instance.signOut();
 
-                // Navigate back to the login page.
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
-                );
-              }
-            },
-            child: Text('Log Out'),
-          )
+                    // Navigate back to the login page.
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                    );
+                  }
+                },
+                child: Text('Log Out'),
+              )
+            ],
+          ),
         ],
       ),
     );

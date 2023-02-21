@@ -78,7 +78,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: Colors.blue,
                               ),
                               onPressed: () async {
-                                if (FirebaseAuth.instance.currentUser == null) {
+                                if (FirebaseAuth.instance.currentUser != null) {
+                                  // GoogleSignInAccount? account =
+                                  //     await GoogleSignIn().signIn();
+                                  // await Firebase.initializeApp();
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage()),
+                                  );
+                                } else {
                                   GoogleSignInAccount? account =
                                       await GoogleSignIn().signIn();
                                   await Firebase.initializeApp();

@@ -79,7 +79,8 @@ class _EditPageState extends State<EditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Edit Kontak"),
+        backgroundColor: Colors.black,
+        title: const Text("Edit Kontak",),
       ),
       body: ListView(
         padding: const EdgeInsets.all(14),
@@ -152,8 +153,11 @@ class _EditPageState extends State<EditPage> {
                 SizedBox(
                   width: double.maxFinite,
                   child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.black,
+                      ),
                       onPressed: editContact,
-                      icon: const Icon(IconlyBroken.edit),
+                      icon: const Icon(Icons.edit),
                       label: const Text("Edit Kontak")),
                 )
               ],
