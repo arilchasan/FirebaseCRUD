@@ -54,6 +54,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("Kontak"),
@@ -96,6 +97,41 @@ class _HomePageState extends State<HomePage> {
                     final String email = contact['email'];
                     final String avatar =
                         "https://api.multiavatar.com/$nama.png";
+                    showAlertDialog(BuildContext context) {
+                      // set up the buttons
+                      Widget cancelButton = TextButton(
+                        child: Text("Cancel"),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      );
+                      Widget continueButton = TextButton(
+                        child: Text("Delete"),
+                        onPressed: () {
+                          deleteContact(contactId);
+                          Navigator.pop(context);
+                        },
+                      );
+
+                      // set up the AlertDialog
+                      AlertDialog alert = AlertDialog(
+                        title: Text("Hapus Kontak"),
+                        content: Text("Apakah anda yakin ingin menghapus?"),
+                        actions: [
+                          cancelButton,
+                          continueButton,
+                        ],
+                      );
+
+                      // show the dialog
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return alert;
+                        },
+                      );
+                    }
+
                     return ListTile(
                       onTap: () {},
                       leading: Hero(
@@ -135,7 +171,8 @@ class _HomePageState extends State<HomePage> {
                           ),
                           IconButton(
                             onPressed: () {
-                              deleteContact(contactId);
+                              showAlertDialog(context);
+                              // deleteContact(contactId);
                             },
                             splashRadius: 24,
                             icon: const Icon(

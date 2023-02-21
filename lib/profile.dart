@@ -24,7 +24,7 @@ class _profileState extends State<profile> {
     final account = GoogleSignIn().currentUser;
 
     return Scaffold(
-        appBar: AppBar(
+        appBar: AppBar( 
           elevation: 0,
           centerTitle: true,
           title: const Text(
@@ -114,6 +114,7 @@ class _profileState extends State<profile> {
                       value: status2,
                       onToggle: (val) {
                         themeProvider.toggleTheme();
+
                         setState(() {
                           status2 = val;
                         });

@@ -57,10 +57,9 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
         create: (context) => ThemeProvider(),
         builder: (context, child) {
-
-              final themeProvider = Provider.of<ThemeProvider>(context);
-          return MaterialApp(   
-            debugShowCheckedModeBanner: false,       
+          final themeProvider = Provider.of<ThemeProvider>(context);
+          return MaterialApp(
+              debugShowCheckedModeBanner: false,
               title: 'Flutter Demo',
               theme: themeProvider.theme,
               home: const LoginScreen());
