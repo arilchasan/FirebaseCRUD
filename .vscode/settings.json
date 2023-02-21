@@ -1,5 +1,5 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.configuration.updateBuildConfiguration": "automatic",
 
     "workbench.settings.editor": "json",
     "workbench.settings.useSplitJSON": true,
