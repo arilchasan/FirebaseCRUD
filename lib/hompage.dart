@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,6 +10,7 @@ import 'package:firebase_crud/my_firebase.dart';
 import 'package:firebase_crud/push/push.dart';
 import 'package:firebase_crud/settings.dart';
 import 'package:firebase_crud/theme.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -24,7 +27,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final kontak = MyFirebase.contactsCollection.snapshots();
+  int _counter = 0;
 
+  void _incrementCounter() async {
+    String? fcmKey = await getFcmToken();
+    print('fcmKey: $fcmKey');
+  }
   // int _counter = 0;
 
   // void _incrementCounter() async {
@@ -56,6 +64,7 @@ class _HomePageState extends State<HomePage> {
                   context,
                   MaterialPageRoute(builder: (context) => SettingsPage()),
                 );
+                _incrementCounter();
               },
               icon: Icon(Icons.settings))
           // Padding(
@@ -218,3 +227,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+Future<String?> getFcmToken() async {
+  if (Platform.isIOS) {
+    String? fcmKey = await FirebaseMessaging.instance.getToken();
+    return fcmKey;
+  }
+  String? fcmKey = await FirebaseMessaging.instance.getToken();
+  return fcmKey;
+}
+
+

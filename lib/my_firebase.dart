@@ -4,3 +4,4 @@ abstract class MyFirebase {
   static final _db = FirebaseFirestore.instance;
   static final contactsCollection = _db.collection('kontak');
 }
+

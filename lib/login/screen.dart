@@ -115,6 +115,22 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ],
                               ),
                             ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePage()),
+                                );
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(top: 80),
+                                child: Text(
+                                  "Skip",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
