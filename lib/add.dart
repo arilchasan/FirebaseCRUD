@@ -59,6 +59,7 @@ class _AddPageState extends State<AddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         title: const Text("Tambah Kontak "),
       ),
       body: ListView(
@@ -118,8 +119,11 @@ class _AddPageState extends State<AddPage> {
                 SizedBox(
                   width: double.maxFinite,
                   child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.black,
+                      ),
                       onPressed: addContact,
-                      icon: const Icon(IconlyBroken.add_user),
+                      icon: const Icon(Icons.person),
                       label: const Text("Simpan")),
                 )
               ],

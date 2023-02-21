@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crud/firebase_option.dart';
 import 'package:firebase_crud/hompage.dart';
+import 'package:firebase_crud/profile.dart';
 import 'package:firebase_crud/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,10 +26,11 @@ class MyApp extends StatelessWidget {
         create: (context) => ThemeProvider(),
         builder: (context, child) {
               final themeProvider = Provider.of<ThemeProvider>(context);
-          return MaterialApp(          
+          return MaterialApp(   
+            debugShowCheckedModeBanner: false,       
               title: 'Flutter Demo',
               theme: themeProvider.theme,
-              home: const HomePage());
+              home: const profile());
         });
   }
 }
