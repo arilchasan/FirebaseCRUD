@@ -45,9 +45,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.black,
         title: const Text("Kontak"),
         actions: [
           IconButton(
@@ -180,14 +181,18 @@ class _HomePageState extends State<HomePage> {
                             );
                           },
                           splashRadius: 24,
-                          icon: const Icon(IconlyBroken.edit),
+                          icon: const Icon(Icons.edit,
+                          color: Colors.black,
+                          ),
                         ),
                         IconButton(
                           onPressed: () {
                             deleteContact(contactId);
                           },
                           splashRadius: 24,
-                          icon: const Icon(IconlyBroken.delete),
+                          icon: const Icon(Icons.delete,
+                          color: Colors.black,
+                          ),
                         ),
                       ],
                     ),
@@ -214,6 +219,12 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         },
+
+        backgroundColor: Colors.black,
+        child: const Icon(Icons.add,
+            color: Colors.white, size: 24
+            ),
+
       ),
     );
   }
