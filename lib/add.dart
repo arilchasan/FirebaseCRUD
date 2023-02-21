@@ -1,10 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_crud/main.dart';
 import 'package:firebase_crud/my_firebase.dart';
+import 'package:firebase_crud/push/push.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:iconly/iconly.dart';
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 class AddPage extends StatefulWidget {
   const AddPage({Key? key}) : super(key: key);
@@ -53,6 +59,12 @@ class _AddPageState extends State<AddPage> {
         ),
       );
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Noti.initialize(flutterLocalNotificationsPlugin);
   }
 
   @override
@@ -119,7 +131,13 @@ class _AddPageState extends State<AddPage> {
                   width: double.maxFinite,
                   child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(),
-                      onPressed: addContact,
+                      onPressed: () {
+                        addContact();
+                        Noti.showBigTextNotification(
+                            title: "Berhasil !!!",
+                            body: "Kontak baru berhasil ditambahkan",
+                            fln: flutterLocalNotificationsPlugin);
+                      },
                       icon: const Icon(Icons.person),
                       label: const Text("Simpan")),
                 )
