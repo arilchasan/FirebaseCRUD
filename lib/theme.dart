@@ -15,3 +15,10 @@ class ThemeProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+
+bool status2 = false;
+
+void changeStatus2(bool newValue) {
+  status2 = newValue;
+}
