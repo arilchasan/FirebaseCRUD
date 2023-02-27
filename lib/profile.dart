@@ -16,8 +16,10 @@ class profile extends StatefulWidget {
 
 class _profileState extends State<profile> {
   bool status2 = false;
+  
   @override
   Widget build(BuildContext context) {
+
     var widthScreen = MediaQuery.of(context).size.width;
     bool IsSmartphone = false;
     if (widthScreen < 550) {
